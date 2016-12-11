@@ -1,0 +1,84 @@
+﻿<Window x:Class="GameLauncher.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:local="clr-namespace:GameLauncher"
+        Title="GameLauncher" WindowState="Maximized" Visibility="{Binding Visibility,Mode=TwoWay}" Height="480" Width="640" WindowStyle="None" Closing="Window_Closing" Loaded="Window_Loaded" FontSize="24" ShowInTaskbar="False" MinWidth="640" MinHeight="480">
+    <Window.DataContext>
+        <local:MainWindowViewModel/>
+    </Window.DataContext>
+    <Window.InputBindings>
+        <KeyBinding Modifiers="Control" Key="E" Command="{Binding ExitCommand}"/>
+    </Window.InputBindings>
+    <Window.Resources>
+        <ResourceDictionary Source="CustomStyles.xaml"/>
+    </Window.Resources>
+    <Window.Style>
+        <DynamicResource ResourceKey="CustomStyle"/>
+    </Window.Style>
+    <Grid>
+        <!--以下終了するときにパスワードを催促する画面(ボツ)-->
+        <!--
+        <Grid Panel.ZIndex="100000000">
+            <Rectangle Fill="Gray" Opacity="0.6"/>
+            <Grid Background="#FFEEEEEE" Width="400" Height="150">
+                <StackPanel Margin="20">
+                    <Label Content="パスワード"/>
+                    <Border Margin="0,10,0,10" BorderThickness="1">
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Setter Property="BorderBrush" Value="#FFCCCCCC"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                                        <Setter Property="BorderBrush" Value="#FF999999"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <PasswordBox BorderThickness="0"/>
+                    </Border>
+                </StackPanel>
+            </Grid>
+        </Grid>
+        -->
+        <Grid Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="6*"/>
+            </Grid.RowDefinitions>
+            <Image Grid.Row="0" Source="./combuke-small.png" HorizontalAlignment="Left"/>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="0.05*"/>
+                    <ColumnDefinition Width="7*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="0.05*"/>
+                        <RowDefinition Height="8*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="0.01*"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Width="{Binding ActualHeight,RelativeSource={RelativeSource Self}}" HorizontalAlignment="Left">
+                            <Image Source="{Binding SelectedGame.Icon}" Name="image"/>
+                        </Label>
+                        <Label Grid.Column="2" Content="{Binding SelectedGame.Name}" VerticalContentAlignment="Center" FontSize="37"/>
+                    </Grid>
+                    <TextBox Grid.Row="2" Text="{Binding SelectedGame.ReadmeText,Mode=OneWay}" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" BorderThickness="0" IsReadOnly="True" Background="Transparent" TextWrapping="Wrap" Focusable="False" Cursor="Arrow"/>
+                </Grid>
+                <ListBox Grid.Column="0" ItemsSource="{Binding Games}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedGame,Mode=TwoWay}" SelectedIndex="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" BorderThickness="0">
+                    <i:Interaction.Behaviors>
+                        <local:ListBoxBehavior/>
+                    </i:Interaction.Behaviors>
+                </ListBox>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,151 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <SolidColorBrush x:Key="Foreground" Color="Black"/>
+    <SolidColorBrush x:Key="Background" Color="#FFEEEEEE"/>
+    <SolidColorBrush x:Key="ListBoxBackground" Color="#10000000"/>
+    <SolidColorBrush x:Key="ThumbNormal" Color="#BBB"/>
+    <SolidColorBrush x:Key="ThumbMouseOver" Color="#888"/>
+    <SolidColorBrush x:Key="ThumbMouseClick" Color="#666"/>
+    <SolidColorBrush x:Key="ButtonNormal" Color="#888"/>
+    <SolidColorBrush x:Key="ButtonMouseOver" Color="#555"/>
+    <SolidColorBrush x:Key="ButtonMouseClick" Color="White"/>
+    <SolidColorBrush x:Key="ButtonBackgroundNormal" Color="Transparent"/>
+    <SolidColorBrush x:Key="ButtonBackgroundMouseOver" Color="Transparent"/>
+    <SolidColorBrush x:Key="ButtonBackgroundMouseClick" Color="#666"/>
+    <SolidColorBrush x:Key="ScrollBarBackground" Color="#18000000"/>
+    
+    <SolidColorBrush x:Key="White_Foreground" Color="Black"/>
+    <SolidColorBrush x:Key="White_Background" Color="#FFEEEEEE"/>
+    <SolidColorBrush x:Key="White_ListBoxBackground" Color="#10000000"/>
+    <SolidColorBrush x:Key="White_ThumbNormal" Color="#BBB"/>
+    <SolidColorBrush x:Key="White_ThumbMouseOver" Color="#888"/>
+    <SolidColorBrush x:Key="White_ThumbMouseClick" Color="#666"/>
+    <SolidColorBrush x:Key="White_ButtonNormal" Color="#888"/>
+    <SolidColorBrush x:Key="White_ButtonMouseOver" Color="#555"/>
+    <SolidColorBrush x:Key="White_ButtonMouseClick" Color="White"/>
+    <SolidColorBrush x:Key="White_ButtonBackgroundNormal" Color="Transparent"/>
+    <SolidColorBrush x:Key="White_ButtonBackgroundMouseOver" Color="Transparent"/>
+    <SolidColorBrush x:Key="White_ButtonBackgroundMouseClick" Color="#666"/>
+    <SolidColorBrush x:Key="White_ScrollBarBackground" Color="#18000000"/>
+    
+    <SolidColorBrush x:Key="Black_Foreground" Color="#FFEEEEEE"/>
+    <SolidColorBrush x:Key="Black_Background" Color="#FF1C1C1C"/>
+    <SolidColorBrush x:Key="Black_ListBoxBackground" Color="#10FFFFFF"/>
+    <SolidColorBrush x:Key="Black_ThumbNormal" Color="#555"/>
+    <SolidColorBrush x:Key="Black_ThumbMouseOver" Color="#888"/>
+    <SolidColorBrush x:Key="Black_ThumbMouseClick" Color="#BBB"/>
+    <SolidColorBrush x:Key="Black_ButtonNormal" Color="#777"/>
+    <SolidColorBrush x:Key="Black_ButtonMouseOver" Color="#AAA"/>
+    <SolidColorBrush x:Key="Black_ButtonMouseClick" Color="Black"/>
+    <SolidColorBrush x:Key="Black_ButtonBackgroundNormal" Color="Transparent"/>
+    <SolidColorBrush x:Key="Black_ButtonBackgroundMouseOver" Color="Transparent"/>
+    <SolidColorBrush x:Key="Black_ButtonBackgroundMouseClick" Color="#BBB"/>
+    <SolidColorBrush x:Key="Black_ScrollBarBackground" Color="#18FFFFFF"/>
+    <Style x:Key="CustomStyle" TargetType="Window">
+        <Setter Property="Background" Value="{DynamicResource Background}"/>
+        <Style.Resources>
+            <Style TargetType="ListBox">
+                <Setter Property="Foreground" Value="{DynamicResource Foreground}"/>
+                <Setter Property="Background" Value="{DynamicResource ListBoxBackground}"/>
+            </Style>
+            <Style TargetType="ListBoxItem">
+                <Setter Property="Padding" Value="3,5,3,5"/>
+                <Setter Property="Foreground" Value="{DynamicResource Foreground}"/>
+                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            </Style>
+            <Style TargetType="Label">
+                <Setter Property="Foreground" Value="{DynamicResource Foreground}"/>
+            </Style>
+            <Style TargetType="TextBox">
+                <Setter Property="Foreground" Value="{DynamicResource Foreground}"/>
+            </Style>
+            <Style TargetType="ScrollBar">
+                <Style.Resources>
+                    <ControlTemplate x:Key="CustomIncreaseDecreaseButton" TargetType="RepeatButton">
+                        <Border BorderThickness="1"
+                                BorderBrush="Transparent"
+                                Background="Transparent"/>
+                    </ControlTemplate>
+                    <ControlTemplate x:Key="CustomLineUpDownButton" TargetType="RepeatButton">
+                        <Border x:Name="border"
+                                BorderThickness="1"
+                                BorderBrush="Transparent"
+                                Background="{DynamicResource ButtonBackgroundNormal}">
+                            <Path x:Name="arrow"
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Center"
+                                  StrokeThickness="0"
+                                  Fill="{DynamicResource ButtonNormal}"
+                                  Data="{Binding Content,RelativeSource={RelativeSource TemplatedParent}}"
+                                  SnapsToDevicePixels="False"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" TargetName="border" Value="{DynamicResource ButtonBackgroundMouseOver}"/>
+                                <Setter Property="Fill" TargetName="arrow" Value="{DynamicResource ButtonMouseOver}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" TargetName="border" Value="{DynamicResource ButtonBackgroundMouseClick}"/>
+                                <Setter Property="Fill" TargetName="arrow" Value="{DynamicResource ButtonMouseClick}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                    <ControlTemplate x:Key="CustomThumb" TargetType="Thumb">
+                        <Grid Background="Transparent">
+                            <Border x:Name="border" Margin="1" Background="{DynamicResource ThumbNormal}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" TargetName="border" Value="{DynamicResource ThumbMouseOver}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseCaptured" Value="True">
+                                <Setter Property="Background" TargetName="border" Value="{DynamicResource ThumbMouseClick}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Style.Resources>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ScrollBar">
+                            <Grid Background="{DynamicResource ScrollBarBackground}" SnapsToDevicePixels="true">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition MaxHeight="{DynamicResource {x:Static SystemParameters.VerticalScrollBarButtonHeightKey}}"/>
+                                    <RowDefinition Height="0.00001*"/>
+                                    <RowDefinition MaxHeight="{DynamicResource {x:Static SystemParameters.VerticalScrollBarButtonHeightKey}}"/>
+                                </Grid.RowDefinitions>
+                                <RepeatButton IsEnabled="{TemplateBinding IsMouseOver}"
+                                              Height="18"
+                                              Command="ScrollBar.LineUpCommand"
+                                              Content="M 5 0 L 0 5 L 0 9 L 5 4 L 10 9 L 10 5 Z"
+                                              Focusable="False"
+                                              Template="{StaticResource CustomLineUpDownButton}"/>
+                                <Track Name="PART_Track" IsDirectionReversed="true" Grid.Row="1" Grid.ZIndex="-1">
+                                    <Track.DecreaseRepeatButton>
+                                        <RepeatButton Command="ScrollBar.PageUpCommand" Focusable="False" Template="{StaticResource CustomIncreaseDecreaseButton}"/>
+                                    </Track.DecreaseRepeatButton>
+                                    <Track.IncreaseRepeatButton>
+                                        <RepeatButton Command="ScrollBar.PageDownCommand" Focusable="False" Template="{StaticResource CustomIncreaseDecreaseButton}"/>
+                                    </Track.IncreaseRepeatButton>
+                                    <Track.Thumb>
+                                        <Thumb Template="{StaticResource CustomThumb}"/>
+                                    </Track.Thumb>
+                                </Track>
+                                <RepeatButton Grid.Row="2"
+                                              Height="18"
+                                              Command="ScrollBar.LineDownCommand"
+                                              Content="M 0 0 L 0 4 L 5 9 L 10 4 L 10 0 L 5 5 Z"
+                                              Focusable="False"
+                                              Template="{StaticResource CustomLineUpDownButton}"/>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger SourceName="PART_Track" Property="IsEnabled" Value="false">
+                                    <Setter TargetName="PART_Track" Property="Visibility" Value="Hidden"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </Style.Resources>
+    </Style>
+</ResourceDictionary>
